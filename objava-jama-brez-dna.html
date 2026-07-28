@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Padla sem v jamo brez dna — Nevesta brez filtra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Caveat:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #F5F0E9;
+    --paper-card: #FFFDFA;
+    --ink: #2B2622;
+    --ink-soft: #6B6058;
+    --pen-red: #C97B95;
+    --pen-red-dim: #F3E2E7;
+    --mustard: #B98A3E;
+    --line: #E1D6C8;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  .wrap{max-width:760px; margin:0 auto; padding:0 28px;}
+
+  nav{
+    max-width:1080px; margin:0 auto; padding:26px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .logo{ font-family:'Fraunces', serif; font-weight:600; font-size:1.25rem; }
+  .logo span{ color:var(--pen-red); font-family:'Caveat', cursive; font-weight:700; font-size:1.35rem; }
+  .back-link{
+    font-size:0.9rem; color:var(--ink-soft); text-decoration:none;
+    display:flex; align-items:center; gap:6px;
+  }
+  .back-link:hover{ color:var(--pen-red); }
+
+  .post-header{ padding:50px 0 30px; border-bottom:1px solid var(--line); }
+  .kicker{
+    font-size:0.78rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase;
+    color:var(--mustard);
+    background:rgba(185,138,62,0.14);
+    display:inline-block;
+    padding:5px 12px; border-radius:100px;
+    margin-bottom:20px;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-size:clamp(1.9rem, 4.5vw, 2.6rem);
+    font-weight:600;
+    line-height:1.22;
+    letter-spacing:-0.01em;
+    margin-bottom:18px;
+  }
+  .meta{
+    font-size:0.9rem; color:var(--ink-soft);
+    display:flex; gap:14px; align-items:center;
+  }
+  .meta .dot::before{ content:"·"; margin:0 6px; }
+
+  .post-body{ padding:44px 0 60px; }
+  .post-body p{
+    font-size:1.08rem;
+    margin-bottom:24px;
+    color:var(--ink);
+  }
+  .post-body p.lede{
+    font-family:'Fraunces', serif;
+    font-size:1.3rem;
+    font-weight:500;
+    color:var(--ink);
+    line-height:1.45;
+  }
+
+  .pullquote{
+    font-family:'Caveat', cursive;
+    font-size:1.9rem;
+    color:var(--pen-red);
+    line-height:1.3;
+    border-left:3px solid var(--pen-red);
+    padding:6px 0 6px 24px;
+    margin:38px 0;
+    transform:rotate(-0.4deg);
+  }
+
+  .signoff{
+    margin-top:40px;
+    padding-top:30px;
+    border-top:1px solid var(--line);
+    display:flex; align-items:center; gap:14px;
+  }
+  .signoff-avatar{
+    width:44px; height:44px; border-radius:50%;
+    background:var(--pen-red-dim);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Caveat', cursive; font-weight:700; font-size:1.3rem;
+    color:var(--pen-red);
+    flex:0 0 auto;
+  }
+  .signoff-name{ font-weight:600; font-size:0.95rem; }
+  .signoff-role{ font-size:0.85rem; color:var(--ink-soft); }
+
+  .cta-band{
+    background:var(--ink); color:var(--paper);
+    padding:56px 0;
+  }
+  .cta-inner{
+    max-width:760px; margin:0 auto; padding:0 28px;
+    display:flex; align-items:center; justify-content:space-between; gap:26px; flex-wrap:wrap;
+  }
+  .cta-inner h3{
+    font-family:'Fraunces', serif; font-size:1.4rem; font-weight:500;
+    max-width:420px; line-height:1.3;
+  }
+  .cta-inner h3 .marker{ color:var(--mustard); font-family:'Caveat', cursive; font-weight:700; }
+  .cta-form{ display:flex; gap:10px; flex-wrap:wrap; }
+  .cta-form input{
+    padding:13px 18px; border-radius:100px; border:none;
+    font-family:'Inter', sans-serif; font-size:0.93rem;
+    min-width:220px; background:#3A3733; color:#fff;
+  }
+  .cta-form input::placeholder{ color:#9C968E; }
+  .cta-form button{
+    background:var(--pen-red); color:#fff; border:none;
+    padding:13px 22px; border-radius:100px; font-weight:600; font-size:0.93rem; cursor:pointer;
+  }
+
+  footer{
+    max-width:1080px; margin:0 auto; padding:30px 28px 50px;
+    font-size:0.85rem; color:var(--ink-soft);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Nevesta <span>brez filtra</span></div>
+  <a href="index.html#blog" class="back-link">← Nazaj na blog</a>
+</nav>
+
+<div class="wrap">
+  <div class="post-header">
+    <span class="kicker">Osebna izkušnja · Prva objava</span>
+    <h1>Padla sem v jamo brez dna (in zato sem začela to pisati)</h1>
+    <div class="meta">
+      <span>Nevesta brez filtra</span>
+      <span class="dot"></span>
+      <span>4 min branja</span>
+    </div>
+  </div>
+
+  <div class="post-body">
+    <p class="lede">Zaročila sva se maja. In ko sva se s partnerjem odločila, da se poročiva naslednje leto, sem si mislila — super, zdaj pride tisti lep, razburljiv del. Namesto tega sem prvi mesec preživela v nečem, čemur zdaj rečem jama brez dna.</p>
+
+    <p>On me večinoma samo posluša, kako nergam. In imam kaj nergati — ne zato, ker bi bilo vsega premalo, ampak ker je vsega preveč, hkrati pa nič ni na enem mestu. Vse se vrti okoli rezervacij ponudnikov, poplave ponudnikov, primerjanja cen — in na koncu sploh ne veš več, kaj dejansko potrebuješ.</p>
+
+    <p>O tem dnevu sanjam že od malih nog. Seveda sem si želela, da bo vse popolno. Fotografinjo sem imela v glavi že od začetka, prav tako glasbo — brez žurke ni poroke, to je bilo jasno. Ampak potem? Dekoracija. Cvetličar. Kdo sploh postavi menije na mize? Kdo uredi cerkev in kako se jo dekorira? Ali cvetje iz cerkve lahko odneseš naprej na slavje? In — zakaj sploh rabim organizatorko, če pa imam že fotografa, lokacijo, videografa in bend?</p>
+
+    <p>Na koncu sem se odločila, da grem vseeno na lov za organizatorko poroke. Kljub temu, da sem imela že polovico stvari urejenih. Zakaj sem jo torej rabila? To je zgodba za drugič. Zdaj samo povem: padla sem v sod brez dna. In zato je nastala ta stran.</p>
+
+    <p>Ne zato, ker bi hotela nadomestiti organizatorke porok, poročne sejme, ChatGPT ali prave strokovnjake. Ampak zato, ker sem to luknjo doživela sama in je nočem olepševati.</p>
+
+    <div class="pullquote">"Ne sekiraj se, saj bo." — hvala, to smo slišale že vse.</div>
+
+    <p>Priznajmo si — vsaka control frikica ve točno, koliko ji pisker dvigne, ko to sliši. Zato tega ne boš dobila tukaj.</p>
+
+    <p>Tukaj sem, da izlivam svojo izkušnjo, brez filtra. Namen te strani je preprost: olajšati prve korake, odgovoriti na prva vprašanja, ki jih nihče ne zna postaviti na pravi način, in deliti pot do — upam — sanjske poroke. Mojo pot, tako kot je, z vsemi luknjami vred.</p>
+
+    <p>Če si tudi ti nekje na začetku in ne veš, kje sploh začeti — dobrodošla. Nisi edina.</p>
+  </div>
+</div>
+
+<div class="cta-band">
+  <div class="cta-inner">
+    <h3>Prijavi se in bodi prva, ki dobi dostop, <span class="marker">ko orodje zaživi.</span></h3>
+    <form class="cta-form" method="POST" action="https://b2a3874e.sibforms.com/serve/MUIFAAqxAFKw9IkJVvDOqp_6X_6U615ZZy0_AvZcPxHAE-BUq_-i2PfMifIa5QPLbQ92Z4xqcmiYBClpuGGPYvQNQWeYRMmtevMmiYVgZbhWrvj9o_K1XdJ5pvGv3OAYfSGp3bWd_ONocsAGSo7GtMXqk2mZR5vnWpHG4iSXT_vk66Cg06nSExfTEG1V7uTezSURt7jUOsSujzAUxg==" data-type="subscription">
+      <input type="email" name="EMAIL" placeholder="tvoj@email.si" autocomplete="off" required>
+      <input type="text" name="email_address_check" value="" style="display:none !important">
+      <input type="hidden" name="locale" value="sl">
+      <button type="submit">Prijava</button>
+    </form>
+  </div>
+</div>
+
+<footer>
+  <div>© 2026 Nevesta brez filtra</div>
+  <div>Made with malo kave in veliko odkritosti.</div>
+</footer>
+
+</body>
+</html>
