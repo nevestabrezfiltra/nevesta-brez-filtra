@@ -32,13 +32,22 @@
     max-width:1080px; margin:0 auto; padding:26px 28px;
     display:flex; align-items:center; justify-content:space-between;
   }
-  .logo{ font-family:'Fraunces', serif; font-weight:600; font-size:1.25rem; }
-  .logo span{ color:var(--pen-red); font-family:'Caveat', cursive; font-weight:700; font-size:1.35rem; }
+  .logo{ font-family:'Fraunces', serif; font-weight:600; font-size:1.6rem; }
+  .logo span{ color:var(--pen-red); font-family:'Caveat', cursive; font-weight:700; font-size:1.75rem; }
   .back-link{
     font-size:0.9rem; color:var(--ink-soft); text-decoration:none;
     display:flex; align-items:center; gap:6px;
   }
   .back-link:hover{ color:var(--pen-red); }
+  .nav-right{ display:flex; align-items:center; gap:22px; }
+  .nav-cta{
+    background:var(--pen-red); color:#fff;
+    padding:9px 18px; border-radius:100px;
+    font-size:0.85rem; font-weight:600; text-decoration:none;
+    white-space:nowrap;
+    display:inline-flex; align-items:center; gap:6px;
+  }
+  .nav-cta svg{ width:15px; height:15px; }
 
   .post-header{ padding:50px 0 30px; border-bottom:1px solid var(--line); }
   .kicker{
@@ -141,7 +150,13 @@
 
 <nav>
   <div class="logo">Nevesta <span>brez filtra</span></div>
-  <a href="index.html#blog" class="back-link">← Nazaj na blog</a>
+  <div class="nav-right">
+    <a href="index.html#blog" class="back-link">← Nazaj na blog</a>
+    <a href="https://www.instagram.com/nevestabrezfiltra/" target="_blank" rel="noopener" class="nav-cta">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none"/></svg>
+      Instagram
+    </a>
+  </div>
 </nav>
 
 <div class="wrap">

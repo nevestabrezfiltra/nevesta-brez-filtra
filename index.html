@@ -48,19 +48,21 @@
   .logo{
     font-family:'Fraunces', serif;
     font-weight:600;
-    font-size:1.25rem;
+    font-size:1.7rem;
     letter-spacing:-0.01em;
   }
-  .logo span{color:var(--pen-red); font-family:'Caveat', cursive; font-weight:700; font-size:1.35rem;}
-  .nav-links{display:flex; gap:32px; font-size:0.92rem; color:var(--ink-soft);}
+  .logo span{color:var(--pen-red); font-family:'Caveat', cursive; font-weight:700; font-size:1.85rem;}
+  .nav-links{display:flex; align-items:center; gap:28px; font-size:0.92rem; color:var(--ink-soft);}
   .nav-links a{text-decoration:none; transition:color .15s;}
   .nav-links a:hover{color:var(--pen-red);}
   .nav-cta{
-    background:var(--ink); color:var(--paper-card);
+    background:var(--pen-red); color:#fff;
     padding:10px 20px; border-radius:100px;
     font-size:0.88rem; font-weight:600; text-decoration:none;
     white-space:nowrap;
+    display:inline-flex; align-items:center; gap:7px;
   }
+  .nav-cta svg{ width:16px; height:16px; }
   @media (max-width:720px){ .nav-links{display:none;} }
 
   /* HERO */
@@ -207,7 +209,7 @@
   }
   .post-strip{ height:8px; background:var(--pen-red); }
   .post:nth-child(2) .post-strip{ background:var(--pen-red); }
-  .post:nth-child(3) .post-strip{ background:var(--ink); }
+  .post:nth-child(3) .post-strip{ background:var(--pen-red); }
   .post-body{ padding:24px; }
   .post-kicker{ font-size:0.78rem; color:var(--ink-soft); font-weight:600; letter-spacing:0.03em; text-transform:uppercase; margin-bottom:10px;}
   .post h4{ font-family:'Fraunces', serif; font-size:1.15rem; font-weight:600; line-height:1.28; margin-bottom:10px;}
@@ -306,9 +308,14 @@
     <div class="nav-links">
       <a href="#stebri">Kako deluje</a>
       <a href="blog.html">Blog</a>
+      <a href="budget-kalkulator.html">Kalkulator</a>
       <a href="#faq">Vprašanja</a>
+      <a href="#prijava">Pridruži se</a>
     </div>
-    <a href="#prijava" class="nav-cta">Pridruži se</a>
+    <a href="https://www.instagram.com/nevestabrezfiltra/" target="_blank" rel="noopener" class="nav-cta">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none"/></svg>
+      Sledi na Instagramu
+    </a>
   </nav>
 
   <section class="hero">
@@ -335,8 +342,8 @@
         <h3>Nevesta brez filtra</h3>
         <p>Iskrene zgodbe pravih nevest — kaj je šlo narobe, koliko je res stalo, česa vam nihče ne pove vnaprej.</p>
       </a>
-      <div class="pillar-card">
-        <span class="pillar-tag">Pogovori</span>
+      <div class="pillar-card" style="opacity:0.75;">
+        <span class="pillar-tag">Pogovori · kmalu</span>
         <h3>Vprašajte ponudnike</h3>
         <p>Fotografi, cvetličarke, lokacije povedo, kaj bi radi, da veste, preden jih najamete — brez prodajne maske.</p>
       </div>
