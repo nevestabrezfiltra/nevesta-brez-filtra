@@ -56,12 +56,16 @@
   .nav-links a{text-decoration:none; transition:color .15s;}
   .nav-links a:hover{color:var(--pen-red);}
   .nav-cta{
-    background:var(--pen-red); color:#fff;
+    background:linear-gradient(135deg, #4f5bd5, #962fbf, #d62976, #fa7e1e, #feda75);
+    color:#fff;
     padding:10px 20px; border-radius:100px;
     font-size:0.88rem; font-weight:600; text-decoration:none;
     white-space:nowrap;
     display:inline-flex; align-items:center; gap:7px;
+    box-shadow:0 4px 14px rgba(214,41,118,0.28);
+    transition:transform .18s ease, box-shadow .18s ease;
   }
+  .nav-cta:hover{ transform:translateY(-1px) scale(1.03); box-shadow:0 6px 18px rgba(214,41,118,0.38); }
   .nav-cta svg{ width:16px; height:16px; }
   @media (max-width:720px){ .nav-links{display:none;} }
 
@@ -306,15 +310,14 @@
   <nav>
     <div class="logo">Nevesta <span>brez filtra</span></div>
     <div class="nav-links">
-      <a href="#stebri">Kako deluje</a>
       <a href="blog.html">Blog</a>
       <a href="budget-kalkulator.html">Kalkulator</a>
+      <a href="casovnica-priprav.html">Časovnica</a>
       <a href="#faq">Vprašanja</a>
-      <a href="#prijava">Pridruži se</a>
     </div>
     <a href="https://www.instagram.com/nevestabrezfiltra/" target="_blank" rel="noopener" class="nav-cta">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none"/></svg>
-      Sledi na Instagramu
+      Sledi mi na Instagramu
     </a>
   </nav>
 
@@ -322,7 +325,7 @@
     <div class="eyebrow">Za neveste, ki ne vedo, kje sploh začeti</div>
     <h1 class="hero-headline">
       <span class="crossed">Vaš popoln poročni dan brez stresa</span>
-      <span class="real-line">Poroka je lahko <span class="marker">kaos</span>. Mi vam pomagamo, da veste, kje začeti.</span>
+      <span class="real-line">Poroka je lahko <span class="marker">kaos</span>. Jaz ti pomagam, da veš, kje začeti.</span>
     </h1>
     <p class="hero-sub">Brez uglajenih fraz in Pinterest fantazij. AI orodje, ki iz kupa odprtih vprašanj naredi budget, časovnico in jasen naslednji korak — plus resnične zgodbe nevest, ki so to že preživele.</p>
     <div class="hero-actions">
@@ -347,12 +350,12 @@
         <h3>Vprašajte ponudnike</h3>
         <p>Fotografi, cvetličarke, lokacije povedo, kaj bi radi, da veste, preden jih najamete — brez prodajne maske.</p>
       </div>
-      <a href="budget-kalkulator.html" class="pillar-card" style="text-decoration:none; color:inherit; display:block;">
+      <div class="pillar-card">
         <span class="pillar-tag">AI orodje · brezplačno</span>
-        <h3>Poročni kalkulator</h3>
-        <p>Vprašalnik, ki iz kaosa naredi jasno razdelitev budgeta po realnih slovenskih cenah — brez olepševanja.</p>
-        <p style="color:var(--pen-red); font-weight:600; margin-top:14px; font-size:0.9rem;">Preizkusi brezplačno →</p>
-      </a>
+        <h3>Kalkulator in časovnica</h3>
+        <p>Vprašalnik, ki iz kaosa naredi jasno razdelitev budgeta po realnih slovenskih cenah, in časovnica, kaj urediti kdaj — brez olepševanja.</p>
+        <p style="margin-top:14px; font-size:0.9rem;"><a href="budget-kalkulator.html" style="color:var(--pen-red); font-weight:600; text-decoration:none;">Kalkulator →</a> &nbsp;·&nbsp; <a href="casovnica-priprav.html" style="color:var(--pen-red); font-weight:600; text-decoration:none;">Časovnica →</a></p>
+      </div>
     </div>
   </section>
 
