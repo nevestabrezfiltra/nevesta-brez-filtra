@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O meni — Nevesta brez filtra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Caveat:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #F5F0E9;
+    --paper-card: #FFFDFA;
+    --ink: #2B2622;
+    --ink-soft: #6B6058;
+    --pen-red: #C97B95;
+    --pen-red-dim: #F3E2E7;
+    --pen-red-deep: #8C4A63;
+    --line: #E1D6C8;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{ background:var(--paper); color:var(--ink); font-family:'Inter', sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  a{color:inherit;}
+  .wrap{max-width:720px; margin:0 auto; padding:0 24px;}
+
+  nav{ max-width:1080px; margin:0 auto; padding:26px 24px; display:flex; align-items:center; justify-content:space-between; }
+  .logo{ font-family:'Fraunces', serif; font-weight:600; font-size:1.6rem; }
+  .logo span{ color:var(--pen-red); font-family:'Caveat', cursive; font-weight:700; font-size:1.75rem; }
+  .nav-links{ display:flex; align-items:center; gap:26px; font-size:0.92rem; color:var(--ink-soft); }
+  .nav-links a{ text-decoration:none; transition:color .15s; }
+  .nav-links a:hover{ color:var(--pen-red); }
+  .nav-cta{
+    background:linear-gradient(135deg, #4f5bd5, #962fbf, #d62976, #fa7e1e, #feda75);
+    color:#fff; padding:10px 20px; border-radius:100px; font-size:0.88rem; font-weight:600; text-decoration:none;
+    white-space:nowrap; display:inline-flex; align-items:center; gap:7px;
+    box-shadow:0 4px 14px rgba(214,41,118,0.28); transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .nav-cta:hover{ transform:translateY(-1px) scale(1.03); box-shadow:0 6px 18px rgba(214,41,118,0.38); }
+  .nav-cta svg{ width:16px; height:16px; }
+  @media (max-width:720px){ .nav-links{display:none;} }
+
+  .hero{ padding:50px 0 20px; }
+  .eyebrow{
+    font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--pen-red-deep); font-weight:700;
+    background:var(--pen-red-dim); display:inline-block; padding:5px 12px; border-radius:100px; margin-bottom:22px;
+  }
+  .hero h1{
+    font-family:'Fraunces', serif; font-size:clamp(1.9rem, 5vw, 2.6rem); font-weight:500; line-height:1.18; letter-spacing:-0.015em;
+    max-width:600px;
+  }
+  .crossed{
+    display:block; color:var(--ink-soft); position:relative; font-style:italic; font-weight:400; font-size:0.6em; margin-bottom:6px;
+  }
+  .crossed::after{ content:""; position:absolute; left:-1%; right:-1%; top:50%; height:2px; background:var(--pen-red); transform:rotate(-2deg); }
+  .real-line{ display:block; }
+  .marker{ font-family:'Caveat', cursive; color:var(--pen-red); font-weight:700; font-size:1.05em; }
+
+  .section{ padding:26px 0; }
+  .section p{ font-size:1.05rem; margin-bottom:18px; max-width:620px; }
+  .section h2{ font-family:'Fraunces', serif; font-size:1.4rem; font-weight:600; margin-bottom:14px; line-height:1.3; max-width:560px; }
+
+  .pullquote{
+    font-family:'Caveat', cursive; font-size:1.9rem; color:var(--pen-red); line-height:1.3;
+    border-left:3px solid var(--pen-red); padding:6px 0 6px 24px; margin:32px 0; transform:rotate(-0.3deg); max-width:560px;
+  }
+
+  .facts-card{
+    background:var(--paper-card); border:1px solid var(--line); border-radius:16px; padding:28px 30px; margin:30px 0;
+  }
+  .facts-card h3{ font-family:'Fraunces', serif; font-size:1.1rem; font-weight:600; margin-bottom:16px; }
+  .facts-list{ display:flex; flex-direction:column; gap:12px; }
+  .fact-row{ display:flex; align-items:flex-start; gap:12px; font-size:0.98rem; }
+  .fact-emoji{ flex:0 0 auto; font-size:1.15rem; line-height:1.4; }
+
+  .closing{
+    background:none; padding:20px 0 4px; margin:20px 0 10px; text-align:center;
+  }
+  .closing p.script{ font-family:'Caveat', cursive; font-size:1.7rem; color:var(--pen-red); margin-bottom:0; }
+
+  .cta-band{ background:var(--pen-red); color:#fff; padding:56px 0; margin-top:40px; }
+  .cta-inner{ max-width:720px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; gap:26px; flex-wrap:wrap; }
+  .cta-inner h3{ font-family:'Fraunces', serif; font-size:1.3rem; font-weight:500; max-width:400px; line-height:1.3; }
+  .cta-inner h3 .marker{ color:var(--ink); }
+  .cta-form{ display:flex; gap:10px; flex-wrap:wrap; }
+  .cta-form input{
+    padding:13px 18px; border-radius:100px; border:none; font-family:'Inter', sans-serif; font-size:0.93rem;
+    min-width:220px; background:#3A3733; color:#fff;
+  }
+  .cta-form input::placeholder{ color:#9C968E; }
+  .cta-form button{
+    background:var(--ink); color:#fff; border:none; padding:13px 22px; border-radius:100px; font-weight:600; font-size:0.93rem; cursor:pointer;
+  }
+
+  footer{ max-width:1080px; margin:0 auto; padding:40px 24px 40px; font-size:0.85rem; color:var(--ink-soft); text-align:center; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Nevesta <span>brez filtra</span></div>
+  <div class="nav-links">
+    <a href="index.html">Domov</a>
+    <a href="blog.html">Blog</a>
+    <a href="budget-kalkulator.html">Kalkulator</a>
+    <a href="casovnica-priprav.html">Časovnica</a>
+  </div>
+  <a href="https://www.instagram.com/nevestabrezfiltra/" target="_blank" rel="noopener" class="nav-cta">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none"/></svg>
+    Sledi mi na Instagramu
+  </a>
+</nav>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="eyebrow">O meni · brez imena, zaenkrat</div>
+    <h1>
+      <span class="crossed">Tu bi moralo pisati moje ime.</span>
+      <span class="real-line">Ampak <span class="marker">(zaenkrat) ne piše.</span></span>
+    </h1>
+  </div>
+
+  <div class="section">
+    <p>In to ni skrivnostnost zaradi učinka. Trenutno sem sama sredi načrtovanja svoje poroke. To stran berejo tudi ljudje, ki jih poznam — včasih celo ponudniki, s katerimi se ravno dogovarjam. Zato sem se odločila, da svoje ime za zdaj obdržim zase. Želim si vsaj en kotiček, kjer lahko pišem popolnoma iskreno, brez da bi vsak stavek najprej presejala skozi to, kdo ga bo prebral.</p>
+  </div>
+
+  <div class="section">
+    <h2>Sem bodoča nevesta, ki nima pojma, kaj počne.</h2>
+    <p>Učim se sproti. Ko naredim napako, jo priznam. Ko česa ne vem, vprašam nekoga, ki ve več kot jaz — in mu potem tudi zares zaupam, namesto da bi vse podvomila.</p>
+    <p>Odkrivam, kako narediti načrtovanje lažje in ta proces manj stresen, kot je — ker mi trenutno uspeva ravno nasprotno: obremenjujem se z vsem.</p>
+  </div>
+
+  <div class="pullquote">Nisem sproščena nevesta. Iskreno — nisem niti sproščena sodelavka, niti sproščena v zasebnem življenju.</div>
+
+  <div class="section">
+    <p>Vse mora biti popolno. Vem, da poroka ne bo popolna. Ampak potrudila se bom, da bo čim bližje temu. To morda ni najbolj zdrav pristop — ampak je pošten, in to je edino, kar ti lahko obljubim na tej strani: poštenost, ne popolnost.</p>
+  </div>
+
+  <div class="facts-card">
+    <h3>Nekaj dejstev o meni</h3>
+    <div class="facts-list">
+      <div class="fact-row"><span class="fact-emoji">💼</span><span>Ukvarjam se z marketingom.</span></div>
+      <div class="fact-row"><span class="fact-emoji">🍷</span><span>Obožujem dobro hrano in vino.</span></div>
+      <div class="fact-row"><span class="fact-emoji">💍</span><span>Z zaročencem sva skupaj že več kot 10 let — in ja, na prstan sem čakala malo predolgo, če mene vprašaš.</span></div>
+      <div class="fact-row"><span class="fact-emoji">🗣️</span><span>Komunikativna, organizirana, včasih lena, ampak vedno vsaj malo zabavna.</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Zakaj sploh to počnem</h2>
+    <p>Ker je organizacija poroke že tako dovolj težka. In če lahko tebi olajšam vsaj en delček te poti — z iskreno zgodbo, pravim orodjem, ali samo občutkom, da nisi edina, ki se izgublja v vsem tem — potem je to dovolj razlog.</p>
+  </div>
+
+  <div class="closing">
+    <p class="script">torej — dajva si malo olajšat.</p>
+  </div>
+</div>
+
+<div class="cta-band">
+  <div class="cta-inner">
+    <h3>Prijavi se in bodi prva, ki dobi dostop, <span class="marker">ko orodje zaživi.</span></h3>
+    <form class="cta-form" method="POST" action="https://b2a3874e.sibforms.com/serve/MUIFAAqxAFKw9IkJVvDOqp_6X_6U615ZZy0_AvZcPxHAE-BUq_-i2PfMifIa5QPLbQ92Z4xqcmiYBClpuGGPYvQNQWeYRMmtevMmiYVgZbhWrvj9o_K1XdJ5pvGv3OAYfSGp3bWd_ONocsAGSo7GtMXqk2mZR5vnWpHG4iSXT_vk66Cg06nSExfTEG1V7uTezSURt7jUOsSujzAUxg==" data-type="subscription">
+      <input type="email" name="EMAIL" placeholder="tvoj@email.si" autocomplete="off" required>
+      <input type="text" name="email_address_check" value="" style="display:none !important">
+      <input type="hidden" name="locale" value="sl">
+      <button type="submit">Prijava</button>
+    </form>
+  </div>
+</div>
+
+<div class="wrap">
+  <footer>© 2026 Nevesta brez filtra</footer>
+</div>
+
+</body>
+</html>
