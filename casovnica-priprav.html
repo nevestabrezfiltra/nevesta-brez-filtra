@@ -309,10 +309,12 @@ function showTimeline(){
         </form>
       </div>
       <div id="pdfGateUnlocked" style="display:none;">
-        <a href="casovnica-priprav.pdf" download class="pdf-download-btn">
+        <p style="margin-bottom:16px; font-weight:600;">Hvala! Prenos je odklenjen 🤍</p>
+        <a href="casovnica-priprav.pdf" download="Casovnica-priprav-Nevesta-brez-filtra.pdf" class="pdf-download-btn" id="pdfDownloadLink">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M12 3v13"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg>
-          Prenesi PDF zdaj
+          Prenesi PDF
         </a>
+        <p style="margin-top:14px; font-size:0.82rem; opacity:0.9;">Če se prenos ne začne, <a href="casovnica-priprav.pdf" target="_blank" style="color:#fff; text-decoration:underline;">klikni tukaj</a>.</p>
       </div>
     </div>
   `;
@@ -335,14 +337,22 @@ function showTimeline(){
     fd.append('email_address_check', '');
     fd.append('locale', 'sl');
 
-    fetch('https://b2a3874e.sibforms.com/serve/MUIFAAqxAFKw9IkJVvDOqp_6X_6U615ZZy0_AvZcPxHAE-BUq_-i2PfMifIa5QPLbQ92Z4xqcmiYBClpuGGPYvQNQWeYRMmtevMmiYVgZbhWrvj9o_K1XdJ5pvGv3OAYfSGp3bWd_ONocsAGSo7GtMXqk2mZR5vnWpHG4iSXT_vk66Cg06nSExfTEG1V7uTezSURt7jUOsSujzAUxg==', {
-      method: 'POST', mode: 'no-cors', body: fd
-    }).finally(function(){
-      document.getElementById('pdfGateForm').style.display = 'none';
-      document.getElementById('pdfGateUnlocked').style.display = 'block';
-      const dl = document.querySelector('#pdfGateUnlocked a.pdf-download-btn');
-      if(dl){ dl.click(); }
-    });
+    // po\u0161lji v Brevo v ozadju \u2014 ne blokiraj odklepa, \u010de zahteva spodleti
+    try{
+      fetch('https://b2a3874e.sibforms.com/serve/MUIFAAqxAFKw9IkJVvDOqp_6X_6U615ZZy0_AvZcPxHAE-BUq_-i2PfMifIa5QPLbQ92Z4xqcmiYBClpuGGPYvQNQWeYRMmtevMmiYVgZbhWrvj9o_K1XdJ5pvGv3OAYfSGp3bWd_ONocsAGSo7GtMXqk2mZR5vnWpHG4iSXT_vk66Cg06nSExfTEG1V7uTezSURt7jUOsSujzAUxg==', {
+        method: 'POST', mode: 'no-cors', body: fd
+      }).catch(function(){});
+    }catch(err){}
+
+    // odkleni takoj
+    document.getElementById('pdfGateForm').style.display = 'none';
+    document.getElementById('pdfGateUnlocked').style.display = 'block';
+
+    // poskusi samodejni prenos (\u010de brskalnik blokira, uporabnica klikne gumb sama)
+    setTimeout(function(){
+      const dl = document.getElementById('pdfDownloadLink');
+      if(dl){ try{ dl.click(); }catch(err){} }
+    }, 400);
   });
 }
 
