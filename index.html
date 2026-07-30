@@ -174,8 +174,8 @@
   .pillar-tag{
     display:inline-block;
     font-size:0.75rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase;
-    color:var(--mustard);
-    background:rgba(217,164,65,0.14);
+    color:var(--pen-red-deep, var(--pen-red));
+    background:var(--pen-red-dim);
     padding:5px 11px; border-radius:100px;
     margin-bottom:16px;
   }
@@ -206,7 +206,7 @@
     display:flex; flex-direction:column;
   }
   .post-strip{ height:8px; background:var(--pen-red); }
-  .post:nth-child(2) .post-strip{ background:var(--mustard); }
+  .post:nth-child(2) .post-strip{ background:var(--pen-red); }
   .post:nth-child(3) .post-strip{ background:var(--ink); }
   .post-body{ padding:24px; }
   .post-kicker{ font-size:0.78rem; color:var(--ink-soft); font-weight:600; letter-spacing:0.03em; text-transform:uppercase; margin-bottom:10px;}
@@ -260,8 +260,8 @@
 
   /* CTA FOOTER */
   .cta-band{
-    background:var(--ink);
-    color:var(--paper);
+    background:var(--pen-red);
+    color:#fff;
     padding:64px 0;
     position:relative; z-index:2;
   }
@@ -274,7 +274,7 @@
     max-width:480px;
     line-height:1.25;
   }
-  .cta-inner h3 .marker{ color:var(--mustard); }
+  .cta-inner h3 .marker{ color:var(--ink); }
   .cta-form{ display:flex; gap:10px; flex-wrap:wrap; }
   .cta-form input{
     padding:14px 18px;
@@ -286,7 +286,7 @@
   }
   .cta-form input::placeholder{ color:#9C968E; }
   .cta-form button{
-    background:var(--pen-red); color:#fff; border:none;
+    background:var(--ink); color:#fff; border:none;
     padding:14px 24px; border-radius:100px;
     font-weight:600; font-size:0.95rem; cursor:pointer;
   }
@@ -330,21 +330,22 @@
       <h2 class="section-title">Trije deli, ena poroka</h2>
     </div>
     <div class="pillar-grid">
-      <div class="pillar-card">
+      <a href="blog.html" class="pillar-card" style="text-decoration:none; color:inherit; display:block;">
         <span class="pillar-tag">Blog</span>
         <h3>Nevesta brez filtra</h3>
         <p>Iskrene zgodbe pravih nevest — kaj je šlo narobe, koliko je res stalo, česa vam nihče ne pove vnaprej.</p>
-      </div>
+      </a>
       <div class="pillar-card">
         <span class="pillar-tag">Pogovori</span>
         <h3>Vprašajte ponudnike</h3>
         <p>Fotografi, cvetličarke, lokacije povedo, kaj bi radi, da veste, preden jih najamete — brez prodajne maske.</p>
       </div>
-      <div class="pillar-card">
-        <span class="pillar-tag">AI orodje</span>
-        <h3>Vaš naslednji korak</h3>
-        <p>Vprašalnik, ki iz kaosa naredi jasen budget, časovnico in seznam nalog — plačate le za module, ki jih rabite.</p>
-      </div>
+      <a href="budget-kalkulator.html" class="pillar-card" style="text-decoration:none; color:inherit; display:block;">
+        <span class="pillar-tag">AI orodje · brezplačno</span>
+        <h3>Poročni kalkulator</h3>
+        <p>Vprašalnik, ki iz kaosa naredi jasno razdelitev budgeta po realnih slovenskih cenah — brez olepševanja.</p>
+        <p style="color:var(--pen-red); font-weight:600; margin-top:14px; font-size:0.9rem;">Preizkusi brezplačno →</p>
+      </a>
     </div>
   </section>
 
