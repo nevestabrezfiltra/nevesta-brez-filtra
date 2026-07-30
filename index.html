@@ -56,7 +56,9 @@
   .nav-links a{text-decoration:none; transition:color .15s;}
   .nav-links a:hover{color:var(--pen-red);}
   .nav-cta{
-    background:linear-gradient(135deg, #4f5bd5, #962fbf, #d62976, #fa7e1e, #feda75);
+    background:linear-gradient(115deg, #4f5bd5, #962fbf, #d62976, #fa7e1e, #feda75, #d62976, #962fbf);
+    background-size:250% 250%;
+    animation: gradientShift 7s ease infinite;
     color:#fff;
     padding:10px 20px; border-radius:100px;
     font-size:0.88rem; font-weight:600; text-decoration:none;
@@ -64,6 +66,11 @@
     display:inline-flex; align-items:center; gap:7px;
     box-shadow:0 4px 14px rgba(214,41,118,0.28);
     transition:transform .18s ease, box-shadow .18s ease;
+  }
+  @keyframes gradientShift{
+    0%{ background-position:0% 50%; }
+    50%{ background-position:100% 50%; }
+    100%{ background-position:0% 50%; }
   }
   .nav-cta:hover{ transform:translateY(-1px) scale(1.03); box-shadow:0 6px 18px rgba(214,41,118,0.38); }
   .nav-cta svg{ width:16px; height:16px; }
@@ -103,8 +110,24 @@
     content:"";
     position:absolute; left:-2%; right:-2%; top:50%;
     height:2px; background:var(--pen-red);
-    transform:rotate(-2deg);
+    transform-origin:left center;
+    animation: drawLine 0.8s cubic-bezier(.65,0,.35,1) 0.5s both;
   }
+  @keyframes drawLine{
+    from{ transform: rotate(-2deg) scaleX(0); }
+    to{ transform: rotate(-2deg) scaleX(1); }
+  }
+  @keyframes fadeUp{
+    from{ opacity:0; transform:translateY(14px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+  .eyebrow{ animation: fadeUp 0.6s ease both; }
+  .hero-headline{ animation: fadeUp 0.6s ease 0.12s both; }
+  .hero-sub{ animation: fadeUp 0.6s ease 0.24s both; }
+  .hero-actions{ animation: fadeUp 0.6s ease 0.36s both; }
+
+  .reveal{ opacity:0; transform:translateY(20px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.visible{ opacity:1; transform:translateY(0); }
   .real-line{
     display:block;
     color:var(--ink);
@@ -297,6 +320,95 @@
     font-weight:600; font-size:0.95rem; cursor:pointer;
   }
 
+  .quote-band{
+    background:var(--pen-red-dim);
+    padding:64px 0;
+    position:relative;
+  }
+  .quote-band-text{
+    font-family:'Caveat', cursive;
+    font-weight:700;
+    color:var(--pen-red-deep, var(--pen-red));
+    font-size:clamp(1.7rem, 4vw, 2.5rem);
+    line-height:1.35;
+    text-align:center;
+    max-width:680px;
+    margin:0 auto;
+    transform:rotate(-0.4deg);
+  }
+
+  /* --- premikajoč trak --- */
+  .marquee{
+    background:var(--ink);
+    padding:16px 0;
+    overflow:hidden;
+    white-space:nowrap;
+  }
+  .marquee-track{
+    display:inline-flex;
+    gap:0;
+    animation: marqueeScroll 38s linear infinite;
+  }
+  .marquee-track span{
+    color:var(--paper);
+    font-family:'Fraunces', serif;
+    font-size:1.05rem;
+    font-weight:500;
+    padding:0 28px;
+    display:inline-flex; align-items:center; gap:28px;
+  }
+  .marquee-track span::after{
+    content:"✦";
+    color:var(--pen-red);
+    font-size:0.8rem;
+  }
+  @keyframes marqueeScroll{
+    from{ transform:translateX(0); }
+    to{ transform:translateX(-50%); }
+  }
+
+  /* --- pas s številkami --- */
+  .stats-band{
+    background:var(--paper-card);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:60px 0;
+  }
+  .stats-head{ text-align:center; margin-bottom:38px; }
+  .stats-head .section-label{ display:block; margin-bottom:6px; }
+  .stats-head h2{ font-family:'Fraunces', serif; font-size:1.7rem; font-weight:600; }
+  .stats-grid{
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:22px;
+    max-width:1000px; margin:0 auto;
+  }
+  .stat-item{ text-align:center; }
+  .stat-num{
+    font-family:'Fraunces', serif;
+    font-size:clamp(1.8rem, 3.4vw, 2.6rem);
+    font-weight:700;
+    color:var(--pen-red);
+    line-height:1.1;
+    margin-bottom:6px;
+  }
+  .stat-label{ font-size:0.88rem; color:var(--ink-soft); line-height:1.4; }
+  .stats-note{ text-align:center; margin-top:30px; font-size:0.82rem; color:var(--ink-soft); }
+  @media (max-width:820px){ .stats-grid{ grid-template-columns:1fr 1fr; } }
+
+  /* --- bloki "kaj dobiš" --- */
+  .benefits{ padding:70px 0; }
+  .benefit-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; margin-top:36px; }
+  @media (max-width:820px){ .benefit-grid{ grid-template-columns:1fr; } }
+  .benefit{ text-align:left; }
+  .benefit-icon{
+    width:46px; height:46px; border-radius:14px;
+    background:var(--pen-red-dim);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:16px;
+  }
+  .benefit-icon svg{ width:22px; height:22px; stroke:var(--pen-red-deep, var(--pen-red)); fill:none; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; }
+  .benefit h3{ font-family:'Fraunces', serif; font-size:1.15rem; font-weight:600; margin-bottom:8px; }
+  .benefit p{ font-size:0.95rem; color:var(--ink-soft); }
+
   footer{
     padding:30px 0 50px;
     font-size:0.85rem; color:var(--ink-soft);
@@ -330,28 +442,36 @@
     </h1>
     <p class="hero-sub">Brez uglajenih fraz in Pinterest fantazij. AI orodje, ki iz kupa odprtih vprašanj naredi budget, časovnico in jasen naslednji korak — plus resnične zgodbe nevest, ki so to že preživele.</p>
     <div class="hero-actions">
-      <a href="#prijava" class="btn-primary">Začni tukaj</a>
+      <a href="casovnica-priprav.html" class="btn-primary">Začni tukaj</a>
       <span class="hero-note">— brez filtra, brez pritiska</span>
     </div>
   </section>
+</div>
 
+<div class="marquee">
+  <div class="marquee-track">
+    <span>brez uglajenih fraz</span><span>realne cene, ne Pinterest</span><span>zgodbe, ne reklame</span><span>orodja, ki so res brezplačna</span><span>tudi, ko gre kaj narobe</span><span>nisi edina</span><span>brez uglajenih fraz</span><span>realne cene, ne Pinterest</span><span>zgodbe, ne reklame</span><span>orodja, ki so res brezplačna</span><span>tudi, ko gre kaj narobe</span><span>nisi edina</span>
+  </div>
+</div>
+
+<div class="wrap">
   <section class="pillars" id="stebri">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="section-label">Kako deluje</span>
       <h2 class="section-title">Trije deli, ena poroka</h2>
     </div>
     <div class="pillar-grid">
-      <a href="blog.html" class="pillar-card" style="text-decoration:none; color:inherit; display:block;">
+      <a href="blog.html" class="pillar-card reveal" style="text-decoration:none; color:inherit; display:block;">
         <span class="pillar-tag">Blog</span>
         <h3>Nevesta brez filtra</h3>
         <p>Iskrene zgodbe pravih nevest — kaj je šlo narobe, koliko je res stalo, česa vam nihče ne pove vnaprej.</p>
       </a>
-      <div class="pillar-card" style="opacity:0.75;">
+      <div class="pillar-card reveal" style="opacity:0.75;">
         <span class="pillar-tag">Pogovori · kmalu</span>
         <h3>Vprašajte ponudnike</h3>
         <p>Fotografi, cvetličarke, lokacije povedo, kaj bi radi, da veste, preden jih najamete — brez prodajne maske.</p>
       </div>
-      <div class="pillar-card">
+      <div class="pillar-card reveal">
         <span class="pillar-tag">AI orodje · brezplačno</span>
         <h3>Kalkulator in časovnica</h3>
         <p>Vprašalnik, ki iz kaosa naredi jasno razdelitev budgeta po realnih slovenskih cenah, in časovnica, kaj urediti kdaj — brez olepševanja.</p>
@@ -359,14 +479,22 @@
       </div>
     </div>
   </section>
+</div>
 
+<div class="quote-band">
+  <div class="wrap">
+    <p class="quote-band-text reveal">Brez filtra pomeni — povem ti točno to, kar bi si sama želela slišati, ko sem začela.</p>
+  </div>
+</div>
+
+<div class="wrap">
   <section class="blog" id="blog">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="section-label">Z bloga</span>
       <h2 class="section-title">Nazadnje objavljeno</h2>
     </div>
     <div class="blog-grid">
-      <a href="objava-jama-brez-dna.html" class="post" style="text-decoration:none; color:inherit;">
+      <a href="objava-jama-brez-dna.html" class="post reveal" style="text-decoration:none; color:inherit;">
         <div class="post-strip"></div>
         <div class="post-body">
           <div class="post-kicker">Osebna izkušnja</div>
@@ -374,7 +502,7 @@
           <p>Zaročila sva se maja. Mislila sem, da bo to lep čas. Namesto tega...</p>
         </div>
       </a>
-      <a href="objava-organizatorka.html" class="post" style="text-decoration:none; color:inherit;">
+      <a href="objava-organizatorka.html" class="post reveal" style="text-decoration:none; color:inherit;">
         <div class="post-strip"></div>
         <div class="post-body">
           <div class="post-kicker">Osebna izkušnja</div>
@@ -382,7 +510,7 @@
           <p>Fotograf, videograf, lokacija — vse urejeno. Pa vseeno...</p>
         </div>
       </a>
-      <a href="objava-lokacija.html" class="post" style="text-decoration:none; color:inherit;">
+      <a href="objava-lokacija.html" class="post reveal" style="text-decoration:none; color:inherit;">
         <div class="post-strip"></div>
         <div class="post-body">
           <div class="post-kicker">Osebna izkušnja</div>
@@ -395,40 +523,100 @@
       <a href="blog.html" style="color:var(--pen-red); font-weight:600; font-size:0.95rem; text-decoration:none;">Vse objave →</a>
     </div>
   </section>
+</div>
+
+<div class="stats-band">
+  <div class="wrap">
+    <div class="stats-head reveal">
+      <span class="section-label">Realne številke</span>
+      <h2>Kaj pravijo podatki o slovenskih porokah?</h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-num">8.180 €</div>
+        <div class="stat-label">povprečna cena poroke v Sloveniji</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-num">80</div>
+        <div class="stat-label">povprečno število svatov</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-num">12–18</div>
+        <div class="stat-label">mesecev vnaprej so zasedene priljubljene lokacije</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-num">~40 %</div>
+        <div class="stat-label">budgeta gre običajno za hrano in pijačo</div>
+      </div>
+    </div>
+    <p class="stats-note">Viri: Omisli.si (na podlagi tisočih dejanskih povpraševanj), The Knot, Zola.</p>
+  </div>
+</div>
+
+<div class="wrap">
+  <section class="benefits">
+    <div class="section-head reveal">
+      <span class="section-label">Kaj dobiš tukaj</span>
+      <h2 class="section-title">Tri stvari, ki ti jih obljubim</h2>
+    </div>
+    <div class="benefit-grid">
+      <div class="benefit reveal">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 3v18M5 8l7-5 7 5"/><circle cx="12" cy="14" r="3"/></svg>
+        </div>
+        <h3>Poštenost, ne popolnost</h3>
+        <p>Povem tudi, kar ni lepo — koliko stvari res stanejo, kaj gre narobe, in kdaj sem sama zgrešila.</p>
+      </div>
+      <div class="benefit reveal">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/><path d="M18.5 16.5l1.6 1.6 3-3"/></svg>
+        </div>
+        <h3>Preverjene številke</h3>
+        <p>Vse cene in roki v orodjih temeljijo na resničnih slovenskih podatkih, ne na ugibanju ali tujih povprečjih.</p>
+      </div>
+      <div class="benefit reveal">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1l8.8 8.8 8.8-8.8a5 5 0 0 0 0-7.1z"/></svg>
+        </div>
+        <h3>Brez pritiska</h3>
+        <p>Orodja so brezplačna, brez registracije. Uporabi, kar ti koristi, preostalo mirno preskoči.</p>
+      </div>
+    </div>
+  </section>
 
   <section class="faq" id="faq">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="section-label">Brez filtra</span>
       <h2 class="section-title">Najpogostejša vprašanja</h2>
     </div>
     <div class="faq-list" id="faqList">
 
-      <div class="faq-item">
+      <div class="faq-item reveal">
         <button class="faq-q">Kje sploh začeti z organizacijo poroke?<span class="faq-icon">+</span></button>
         <div class="faq-a"><div class="faq-a-inner">Z budgetom, ne z dekoracijo. Ko veste, koliko dejansko lahko porabite, se vse ostalo — lokacija, št. gostov, ponudniki — samo od sebe zoži. Naš AI vprašalnik začne točno tukaj.</div></div>
       </div>
 
-      <div class="faq-item">
+      <div class="faq-item reveal">
         <button class="faq-q">Koliko dejansko stane poroka v Sloveniji?<span class="faq-icon">+</span></button>
         <div class="faq-a"><div class="faq-a-inner">Odvisno od št. gostov in lokacije, a realno gledano je vmesni razpon bistveno širši, kot ga prikazujejo poročni portali. Zato v blogu objavljamo prave stroškovnike, ne ocenjene povprečja.</div></div>
       </div>
 
-      <div class="faq-item">
+      <div class="faq-item reveal">
         <button class="faq-q">Koliko časa vnaprej naj začnem načrtovati?<span class="faq-icon">+</span></button>
         <div class="faq-a"><div class="faq-a-inner">Za priljubljene lokacije in termine v sezoni (maj–september) vsaj 9–12 mesecev prej. Za manjšo, bolj sproščeno poroko lahko tudi manj — naše orodje vam glede na datum sestavi realno časovnico.</div></div>
       </div>
 
-      <div class="faq-item">
+      <div class="faq-item reveal">
         <button class="faq-q">Ali res rabim organizatorko poroke?<span class="faq-icon">+</span></button>
         <div class="faq-a"><div class="faq-a-inner">Ne nujno. Mi rešujemo fazo pred tem — da veste, kaj sploh rabite in koliko lahko porabite. Če se kasneje odločite za organizatorko, greste v prvi sestanek pripravljeni, ne z praznim listom.</div></div>
       </div>
 
-      <div class="faq-item">
+      <div class="faq-item reveal">
         <button class="faq-q">Kaj točno dobim od AI orodja?<span class="faq-icon">+</span></button>
         <div class="faq-a"><div class="faq-a-inner">Štiri module: budget razdelitev, časovnico priprav, popoln checklist in pripravljena vprašanja za ponudnike. Izberete, kaj rabite — ni treba kupiti vsega naenkrat.</div></div>
       </div>
 
-      <div class="faq-item">
+      <div class="faq-item reveal">
         <button class="faq-q">Kako delujejo točke?<span class="faq-icon">+</span></button>
         <div class="faq-a"><div class="faq-a-inner">Vsak modul (budget, časovnica, checklist, vprašanja za ponudnike) uporabi določeno število točk iz vašega paketa. Tako izberete natanko to, kar rabite, ne celotnega paketa naenkrat.</div></div>
       </div>
@@ -457,6 +645,17 @@
 </div>
 
 <script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if(entry.isIntersecting){
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => revealObserver.observe(el));
+
   document.querySelectorAll('.faq-item').forEach(item => {
     const btn = item.querySelector('.faq-q');
     const answer = item.querySelector('.faq-a');
