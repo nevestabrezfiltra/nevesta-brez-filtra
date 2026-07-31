@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>O meni — Nevesta brez filtra</title>
+<meta name="description" content="Bodoča nevesta, ki se organizacije poroke uči sproti — brez pretvarjanja, da je vse pod nadzorom. Spoznaj zgodbo za Nevesta brez filtra.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Caveat:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -29,11 +30,14 @@
   .nav-links a{ text-decoration:none; transition:color .15s; }
   .nav-links a:hover{ color:var(--pen-red); }
   .nav-cta{
-    background:linear-gradient(135deg, #4f5bd5, #962fbf, #d62976, #fa7e1e, #feda75);
+    background:linear-gradient(115deg, #4f5bd5, #962fbf, #d62976, #fa7e1e, #feda75, #d62976, #962fbf);
+    background-size:250% 250%;
+    animation: gradientShift 7s ease infinite;
     color:#fff; padding:10px 20px; border-radius:100px; font-size:0.88rem; font-weight:600; text-decoration:none;
     white-space:nowrap; display:inline-flex; align-items:center; gap:7px;
     box-shadow:0 4px 14px rgba(214,41,118,0.28); transition:transform .18s ease, box-shadow .18s ease;
   }
+  @keyframes gradientShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
   .nav-cta:hover{ transform:translateY(-1px) scale(1.03); box-shadow:0 6px 18px rgba(214,41,118,0.38); }
   .nav-cta svg{ width:16px; height:16px; }
   @media (max-width:720px){ .nav-links{display:none;} }
@@ -91,6 +95,9 @@
   }
 
   footer{ max-width:1080px; margin:0 auto; padding:40px 24px 40px; font-size:0.85rem; color:var(--ink-soft); text-align:center; }
+
+  .reveal{ opacity:0; transform:translateY(20px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.visible{ opacity:1; transform:translateY(0); }
 </style>
 </head>
 <body>
@@ -118,23 +125,23 @@
     </h1>
   </div>
 
-  <div class="section">
+  <div class="section reveal">
     <p>In to ni skrivnostnost zaradi učinka. Trenutno sem sama sredi načrtovanja svoje poroke. To stran berejo tudi ljudje, ki jih poznam — včasih celo ponudniki, s katerimi se ravno dogovarjam. Zato sem se odločila, da svoje ime za zdaj obdržim zase. Želim si vsaj en kotiček, kjer lahko pišem popolnoma iskreno, brez da bi vsak stavek najprej presejala skozi to, kdo ga bo prebral.</p>
   </div>
 
-  <div class="section">
+  <div class="section reveal">
     <h2>Sem bodoča nevesta, ki nima pojma, kaj počne.</h2>
     <p>Učim se sproti. Ko naredim napako, jo priznam. Ko česa ne vem, vprašam nekoga, ki ve več kot jaz — in mu potem tudi zares zaupam, namesto da bi vse podvomila.</p>
     <p>Odkrivam, kako narediti načrtovanje lažje in ta proces manj stresen, kot je — ker mi trenutno uspeva ravno nasprotno: obremenjujem se z vsem.</p>
   </div>
 
-  <div class="pullquote">Nisem sproščena nevesta. Iskreno — nisem niti sproščena sodelavka, niti sproščena v zasebnem življenju.</div>
+  <div class="pullquote reveal">Nisem sproščena nevesta. Iskreno — nisem niti sproščena sodelavka, niti sproščena v zasebnem življenju.</div>
 
-  <div class="section">
+  <div class="section reveal">
     <p>Vse mora biti popolno. Vem, da poroka ne bo popolna. Ampak potrudila se bom, da bo čim bližje temu. To morda ni najbolj zdrav pristop — ampak je pošten, in to je edino, kar ti lahko obljubim na tej strani: poštenost, ne popolnost.</p>
   </div>
 
-  <div class="facts-card">
+  <div class="facts-card reveal">
     <h3>Nekaj dejstev o meni</h3>
     <div class="facts-list">
       <div class="fact-row"><span class="fact-emoji">💼</span><span>Ukvarjam se z marketingom.</span></div>
@@ -144,7 +151,7 @@
     </div>
   </div>
 
-  <div class="section">
+  <div class="section reveal">
     <h2>Zakaj sploh to počnem</h2>
     <p>Ker je organizacija poroke že tako dovolj težka. In če lahko tebi olajšam vsaj en delček te poti — z iskreno zgodbo, pravim orodjem, ali samo občutkom, da nisi edina, ki se izgublja v vsem tem — potem je to dovolj razlog.</p>
   </div>
@@ -170,5 +177,18 @@
   <footer>© 2026 Nevesta brez filtra</footer>
 </div>
 
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if(entry.isIntersecting){
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => revealObserver.observe(el));
+</script>
 </body>
 </html>
