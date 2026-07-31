@@ -230,12 +230,15 @@
 <div class="cta-band">
   <div class="cta-inner">
     <h3>Prijavi se — ne za reklame, ampak da veš, <span class="marker">ko se mi spet kaj zalomi pri organizaciji.</span></h3>
-    <form class="cta-form" method="POST" action="https://b2a3874e.sibforms.com/serve/MUIFAAqxAFKw9IkJVvDOqp_6X_6U615ZZy0_AvZcPxHAE-BUq_-i2PfMifIa5QPLbQ92Z4xqcmiYBClpuGGPYvQNQWeYRMmtevMmiYVgZbhWrvj9o_K1XdJ5pvGv3OAYfSGp3bWd_ONocsAGSo7GtMXqk2mZR5vnWpHG4iSXT_vk66Cg06nSExfTEG1V7uTezSURt7jUOsSujzAUxg==" data-type="subscription">
-      <input type="email" name="EMAIL" placeholder="tvoj@email.si" autocomplete="off" required>
-      <input type="text" name="email_address_check" value="" style="display:none !important">
-      <input type="hidden" name="locale" value="sl">
-      <button type="submit">Prijava</button>
-    </form>
+    <div>
+      <form class="cta-form" id="mainSignupForm">
+        <input type="email" name="EMAIL" id="mainSignupEmail" placeholder="tvoj@email.si" autocomplete="off" required>
+        <input type="text" name="email_address_check" value="" style="display:none !important">
+        <input type="hidden" name="locale" value="sl">
+        <button type="submit">Prijava</button>
+      </form>
+      <div id="mainSignupMsg" style="margin-top:12px; font-size:0.9rem; display:none;"></div>
+    </div>
   </div>
 </div>
 
@@ -244,5 +247,31 @@
   <div>Made with malo kave in veliko odkritosti.</div>
 </footer>
 
+<script>
+  const mainForm = document.getElementById('mainSignupForm');
+  if(mainForm){
+    mainForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      const btn = this.querySelector('button');
+      const msg = document.getElementById('mainSignupMsg');
+      const emailVal = document.getElementById('mainSignupEmail').value;
+      btn.disabled = true;
+      btn.textContent = 'Trenutek …';
+
+      const fd = new FormData();
+      fd.append('EMAIL', emailVal);
+      fd.append('email_address_check', '');
+      fd.append('locale', 'sl');
+
+      fetch('https://b2a3874e.sibforms.com/serve/MUIFAAqxAFKw9IkJVvDOqp_6X_6U615ZZy0_AvZcPxHAE-BUq_-i2PfMifIa5QPLbQ92Z4xqcmiYBClpuGGPYvQNQWeYRMmtevMmiYVgZbhWrvj9o_K1XdJ5pvGv3OAYfSGp3bWd_ONocsAGSo7GtMXqk2mZR5vnWpHG4iSXT_vk66Cg06nSExfTEG1V7uTezSURt7jUOsSujzAUxg==', {
+        method: 'POST', mode: 'no-cors', body: fd
+      }).catch(function(){}).finally(function(){
+        mainForm.style.display = 'none';
+        msg.style.display = 'block';
+        msg.innerHTML = 'Hvala! Preveri e-pošto 🤍';
+      });
+    });
+  }
+</script>
 </body>
 </html>
