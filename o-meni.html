@@ -40,17 +40,43 @@
   @keyframes gradientShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
   .nav-cta:hover{ transform:translateY(-1px) scale(1.03); box-shadow:0 6px 18px rgba(214,41,118,0.38); }
   .nav-cta svg{ width:16px; height:16px; }
-  .nav-toggle{ display:none; background:none; border:none; cursor:pointer; padding:6px; }
-  .nav-toggle svg{ width:24px; height:24px; stroke:var(--ink); }
+  .nav-toggle{ display:none; background:none; border:none; cursor:pointer; padding:6px; flex:0 0 auto; }
+  .nav-toggle svg{ width:26px; height:26px; stroke:var(--ink); display:block; }
+
+  .mobile-menu{
+    display:none;
+    position:fixed; inset:0;
+    background:var(--paper);
+    z-index:999;
+    padding:24px 26px;
+    flex-direction:column;
+    overflow-y:auto;
+  }
+  .mobile-menu.open{ display:flex; }
+  .mobile-menu-top{ display:flex; align-items:center; justify-content:space-between; margin-bottom:46px; }
+  .mobile-menu-top .logo{ font-size:1.4rem; }
+  .mobile-menu-top .logo span{ font-size:1.55rem; }
+  .mobile-menu-close{ background:none; border:none; cursor:pointer; padding:6px; }
+  .mobile-menu-close svg{ width:26px; height:26px; stroke:var(--ink); display:block; }
+  .mobile-menu-links{ display:flex; flex-direction:column; gap:26px; }
+  .mobile-menu-links a{
+    font-family:'Fraunces', serif; font-size:1.5rem; font-weight:600; color:var(--ink); text-decoration:none;
+  }
+  .mobile-menu-ig{
+    margin-top:auto; padding-top:34px;
+    display:inline-flex; align-items:center; gap:9px;
+    color:var(--pen-red-deep, var(--pen-red)); font-weight:700; text-decoration:none; font-size:1.05rem;
+  }
+  .mobile-menu-ig svg{ width:20px; height:20px; }
+  body.menu-open{ overflow:hidden; }
+
   @media (max-width:720px){
     .nav-toggle{ display:block; }
-    .nav-links{ display:none; }
-    .nav-links.mobile-open{
-      display:flex; flex-direction:column; align-items:flex-start; gap:16px;
-      position:absolute; top:100%; left:0; right:0;
-      background:var(--paper-card); border-bottom:1px solid var(--line);
-      padding:22px 24px; z-index:50; box-shadow:0 10px 24px rgba(0,0,0,0.1);
-    }
+    .nav-links{ display:none !important; }
+    .nav-cta{ display:none; }
+    .logo{ font-size:1.35rem; }
+    .logo span{ font-size:1.5rem; }
+    nav{ padding:20px 24px; }
   }
 
   .hero{ padding:50px 0 20px; }
@@ -115,9 +141,6 @@
 
 <nav>
   <div class="logo">Nevesta <span>brez filtra</span></div>
-  <button class="nav-toggle" onclick="toggleMobileNav()" aria-label="Meni">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-  </button>
   <div class="nav-links" id="navLinks">
     <a href="index.html">Domov</a>
     <a href="blog.html">Blog</a>
@@ -128,7 +151,29 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none"/></svg>
     Sledi mi na Instagramu
   </a>
+  <button class="nav-toggle" onclick="toggleMobileNav()" aria-label="Odpri meni">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-top">
+    <div class="logo">Nevesta <span>brez filtra</span></div>
+    <button class="mobile-menu-close" onclick="toggleMobileNav()" aria-label="Zapri meni">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="mobile-menu-links">
+    <a href="index.html">Domov</a>
+    <a href="blog.html">Blog</a>
+    <a href="budget-kalkulator.html">Kalkulator</a>
+    <a href="casovnica-priprav.html">Časovnica</a>
+  </div>
+  <a href="https://www.instagram.com/nevestabrezfiltra/" target="_blank" rel="noopener" class="mobile-menu-ig">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none"/></svg>
+    Sledi mi na Instagramu
+  </a>
+</div>
 
 <div class="wrap">
   <div class="hero">
@@ -194,10 +239,15 @@
 
 <script>
   function toggleMobileNav(){
-    document.getElementById('navLinks').classList.toggle('mobile-open');
+    const menu = document.getElementById('mobileMenu');
+    menu.classList.toggle('open');
+    document.body.classList.toggle('menu-open', menu.classList.contains('open'));
   }
-  document.querySelectorAll('#navLinks a').forEach(a => {
-    a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('mobile-open'));
+  document.querySelectorAll('#mobileMenu a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.remove('open');
+      document.body.classList.remove('menu-open');
+    });
   });
 
   const revealEls = document.querySelectorAll('.reveal');
