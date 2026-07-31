@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ponudniki — Nevesta brez filtra</title>
+<meta name="description" content="Katalog poročnih ponudnikov, ki jim zaupam — v gradnji. Kmalu priporočila po kategorijah, preverjena osebno, ne plačana.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Caveat:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #F5F0E9;
+    --paper-card: #FFFDFA;
+    --ink: #2B2622;
+    --ink-soft: #6B6058;
+    --pen-red: #C97B95;
+    --pen-red-dim: #F3E2E7;
+    --pen-red-deep: #8C4A63;
+    --line: #E1D6C8;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{ background:var(--paper); color:var(--ink); font-family:'Inter', sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  a{color:inherit;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 24px;}
+  svg.icon{ stroke:currentColor; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+
+  nav{ max-width:1080px; margin:0 auto; padding:26px 24px; display:flex; align-items:center; justify-content:space-between; position:relative; }
+  .logo{ font-family:'Fraunces', serif; font-weight:600; font-size:1.6rem; }
+  .logo span{ color:var(--pen-red); font-family:'Caveat', cursive; font-weight:700; font-size:1.75rem; }
+  .nav-links{ display:flex; align-items:center; gap:26px; font-size:0.92rem; color:var(--ink-soft); }
+  .nav-links a{ text-decoration:none; transition:color .15s; }
+  .nav-links a:hover{ color:var(--pen-red); }
+  .nav-cta{
+    background:linear-gradient(115deg, #4f5bd5, #962fbf, #d62976, #fa7e1e, #feda75, #d62976, #962fbf);
+    background-size:250% 250%;
+    animation: gradientShift 7s ease infinite;
+    color:#fff; padding:10px 20px; border-radius:100px; font-size:0.88rem; font-weight:600; text-decoration:none;
+    white-space:nowrap; display:inline-flex; align-items:center; gap:7px;
+    box-shadow:0 4px 14px rgba(214,41,118,0.28); transition:transform .18s ease, box-shadow .18s ease;
+  }
+  @keyframes gradientShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+  .nav-cta:hover{ transform:translateY(-1px) scale(1.03); box-shadow:0 6px 18px rgba(214,41,118,0.38); }
+  .nav-cta svg{ width:16px; height:16px; }
+
+  .nav-toggle{ display:none; background:none; border:none; cursor:pointer; padding:6px; flex:0 0 auto; }
+  .nav-toggle svg{ width:26px; height:26px; stroke:var(--ink); display:block; }
+  .mobile-menu{ display:none; position:fixed; inset:0; background:var(--paper); z-index:999; padding:24px 26px; flex-direction:column; overflow-y:auto; }
+  .mobile-menu.open{ display:flex; }
+  .mobile-menu-top{ display:flex; align-items:center; justify-content:space-between; margin-bottom:46px; }
+  .mobile-menu-top .logo{ font-size:1.4rem; }
+  .mobile-menu-top .logo span{ font-size:1.55rem; }
+  .mobile-menu-close{ background:none; border:none; cursor:pointer; padding:6px; }
+  .mobile-menu-close svg{ width:26px; height:26px; stroke:var(--ink); display:block; }
+  .mobile-menu-links{ display:flex; flex-direction:column; gap:26px; }
+  .mobile-menu-links a{ font-family:'Fraunces', serif; font-size:1.5rem; font-weight:600; color:var(--ink); text-decoration:none; }
+  .mobile-menu-ig{ margin-top:auto; padding-top:34px; display:inline-flex; align-items:center; gap:9px; color:var(--pen-red-deep); font-weight:700; text-decoration:none; font-size:1.05rem; }
+  .mobile-menu-ig svg{ width:20px; height:20px; }
+  body.menu-open{ overflow:hidden; }
+  @media (max-width:720px){
+    .nav-toggle{ display:block; }
+    .nav-links{ display:none !important; }
+    .nav-cta{ display:none; }
+    .logo{ font-size:1.35rem; }
+    .logo span{ font-size:1.5rem; }
+    nav{ padding:20px 24px; }
+  }
+
+  .hero{ padding:56px 0 40px; text-align:center; }
+  .eyebrow{
+    font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--pen-red-deep); font-weight:700;
+    background:var(--pen-red-dim); display:inline-block; padding:5px 12px; border-radius:100px; margin-bottom:20px;
+  }
+  .hero h1{ font-family:'Fraunces', serif; font-size:clamp(1.9rem, 5vw, 2.6rem); font-weight:600; line-height:1.25; max-width:640px; margin:0 auto 16px; }
+  .hero p{ color:var(--ink-soft); font-size:1.05rem; max-width:520px; margin:0 auto; }
+
+  .why-band{ background:var(--paper-card); border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:44px 0; margin:40px 0; }
+  .why-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; max-width:900px; margin:0 auto; text-align:center; }
+  .why-item h3{ font-family:'Fraunces', serif; font-size:1.05rem; font-weight:600; margin-bottom:8px; }
+  .why-item p{ font-size:0.9rem; color:var(--ink-soft); }
+  @media (max-width:720px){ .why-grid{ grid-template-columns:1fr; gap:30px; } }
+
+  .cat-section{ padding:10px 0 60px; }
+  .section-head{ text-align:center; margin-bottom:38px; }
+  .section-label{ font-family:'Caveat', cursive; color:var(--pen-red); font-size:1.3rem; font-weight:700; display:block; margin-bottom:6px; }
+  .section-title{ font-family:'Fraunces', serif; font-size:1.7rem; font-weight:600; }
+
+  .cat-grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:18px; }
+  @media (max-width:900px){ .cat-grid{ grid-template-columns:repeat(2, 1fr); } }
+  @media (max-width:480px){ .cat-grid{ grid-template-columns:1fr; } }
+
+  .cat-card{
+    background:var(--paper-card); border:1px solid var(--line); border-radius:16px;
+    padding:26px 22px; position:relative; overflow:hidden;
+  }
+  .cat-icon{
+    width:44px; height:44px; border-radius:12px; background:var(--pen-red-dim);
+    display:flex; align-items:center; justify-content:center; margin-bottom:16px;
+  }
+  .cat-icon svg{ width:22px; height:22px; color:var(--pen-red-deep); }
+  .cat-card h3{ font-family:'Fraunces', serif; font-size:1.05rem; font-weight:600; margin-bottom:6px; }
+  .cat-card p{ font-size:0.85rem; color:var(--ink-soft); margin-bottom:14px; }
+  .cat-badge{
+    font-size:0.7rem; font-weight:700; letter-spacing:0.03em; text-transform:uppercase;
+    color:var(--pen-red-deep); background:var(--pen-red-dim); padding:4px 10px; border-radius:100px;
+    display:inline-block;
+  }
+
+  .suggest-band{ padding:60px 0; }
+  .suggest-card{
+    background:var(--ink); color:var(--paper); border-radius:20px; padding:44px 40px;
+    display:flex; align-items:center; justify-content:space-between; gap:30px; flex-wrap:wrap;
+  }
+  .suggest-card h3{ font-family:'Fraunces', serif; font-size:1.4rem; font-weight:500; max-width:420px; line-height:1.35; }
+  .suggest-card h3 .marker{ font-family:'Caveat', cursive; color:var(--pen-red); font-weight:700; }
+  .suggest-actions{ display:flex; flex-direction:column; gap:10px; }
+  .suggest-btn{
+    display:inline-flex; align-items:center; gap:8px; text-decoration:none;
+    padding:12px 22px; border-radius:100px; font-weight:600; font-size:0.92rem; white-space:nowrap;
+  }
+  .suggest-btn.primary{ background:var(--pen-red); color:#fff; }
+  .suggest-btn.secondary{ background:rgba(255,255,255,0.1); color:#fff; border:1px solid rgba(255,255,255,0.3); }
+  @media (max-width:720px){ .suggest-card{ flex-direction:column; align-items:flex-start; } }
+
+  .cta-band{ background:var(--pen-red); color:#fff; padding:56px 0; }
+  .cta-inner{ max-width:1080px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; gap:26px; flex-wrap:wrap; }
+  .cta-inner h3{ font-family:'Fraunces', serif; font-size:1.3rem; font-weight:500; max-width:420px; line-height:1.3; }
+  .cta-inner h3 .marker{ color:var(--ink); font-family:'Caveat', cursive; font-weight:700; }
+  .cta-form{ display:flex; gap:10px; flex-wrap:wrap; }
+  .cta-form input{ padding:13px 18px; border-radius:100px; border:none; font-family:'Inter', sans-serif; font-size:0.93rem; min-width:220px; background:#3A3733; color:#fff; }
+  .cta-form input::placeholder{ color:#9C968E; }
+  .cta-form button{ background:var(--ink); color:#fff; border:none; padding:13px 22px; border-radius:100px; font-weight:600; font-size:0.93rem; cursor:pointer; }
+
+  footer{ max-width:1080px; margin:0 auto; padding:40px 24px 40px; font-size:0.85rem; color:var(--ink-soft); text-align:center; }
+
+  .reveal{ opacity:0; transform:translateY(20px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.visible{ opacity:1; transform:translateY(0); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Nevesta <span>brez filtra</span></div>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html">Domov</a>
+    <a href="blog.html">Blog</a>
+    <a href="budget-kalkulator.html">Kalkulator</a>
+    <a href="casovnica-priprav.html">Časovnica</a>
+    <a href="o-meni.html">O meni</a>
+  </div>
+  <a href="https://www.instagram.com/nevestabrezfiltra/" target="_blank" rel="noopener" class="nav-cta">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none"/></svg>
+    Sledi mi na Instagramu
+  </a>
+  <button class="nav-toggle" onclick="toggleMobileNav()" aria-label="Odpri meni">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-top">
+    <div class="logo">Nevesta <span>brez filtra</span></div>
+    <button class="mobile-menu-close" onclick="toggleMobileNav()" aria-label="Zapri meni">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="mobile-menu-links">
+    <a href="index.html">Domov</a>
+    <a href="blog.html">Blog</a>
+    <a href="budget-kalkulator.html">Kalkulator</a>
+    <a href="casovnica-priprav.html">Časovnica</a>
+    <a href="o-meni.html">O meni</a>
+  </div>
+  <a href="https://www.instagram.com/nevestabrezfiltra/" target="_blank" rel="noopener" class="mobile-menu-ig">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none"/></svg>
+    Sledi mi na Instagramu
+  </a>
+</div>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="eyebrow">Ponudniki · v gradnji</div>
+    <h1>Ponudniki, ki jim (bom) zaupala</h1>
+    <p>Ne plačan imenik. Ne seznam vseh, ki obstajajo. Samo tisti, za katere sem se sama prepričala — ali se ravno prepričujem — da so vredni priporočila.</p>
+  </div>
+</div>
+
+<div class="why-band">
+  <div class="wrap">
+    <div class="why-grid">
+      <div class="why-item reveal">
+        <h3>Brez plačanih uvrstitev</h3>
+        <p>Če bo kdo tukaj, bo zato, ker je dober — ne ker je plačal za mesto na seznamu.</p>
+      </div>
+      <div class="why-item reveal">
+        <h3>Osebno preverjeno</h3>
+        <p>Vsakega ponudnika bom spoznala sama — prek pogovora, izkušnje, ali priporočila, ki mu zaupam.</p>
+      </div>
+      <div class="why-item reveal">
+        <h3>Brez olepševanja</h3>
+        <p>Če nekaj ni bilo super, bo to tudi pisalo. Enako kot na blogu.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="cat-section">
+    <div class="section-head reveal">
+      <span class="section-label">Kmalu</span>
+      <h2 class="section-title">Kategorije, ki prihajajo</h2>
+    </div>
+    <div class="cat-grid">
+      <div class="cat-card reveal">
+        <div class="cat-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7-6.3-7-11.5A7 7 0 0 1 19 9.5C19 14.7 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.4"/></svg></div>
+        <h3>Lokacije</h3>
+        <p>Od intimnih do butičnih posestev.</p>
+        <span class="cat-badge">Kmalu</span>
+      </div>
+      <div class="cat-card reveal">
+        <div class="cat-icon"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2.2"/><path d="M8.5 7l1.3-2.6h4.4L15.5 7"/><circle cx="12" cy="13.6" r="3.4"/></svg></div>
+        <h3>Fotografija in video</h3>
+        <p>Ujamejo dan, ne le poze.</p>
+        <span class="cat-badge">Kmalu</span>
+      </div>
+      <div class="cat-card reveal">
+        <div class="cat-icon"><svg class="icon" viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="12" cy="12" r="2.3"/><ellipse cx="12" cy="6" rx="2.3" ry="3.6"/><ellipse cx="12" cy="18" rx="2.3" ry="3.6"/><ellipse cx="6" cy="12" rx="3.6" ry="2.3"/><ellipse cx="18" cy="12" rx="3.6" ry="2.3"/></svg></div>
+        <h3>Cvetličarke in dekoracija</h3>
+        <p>Za tiste, ki znajo z rožami.</p>
+        <span class="cat-badge">Kmalu</span>
+      </div>
+      <div class="cat-card reveal">
+        <div class="cat-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M6 2v7a1.7 1.7 0 0 0 3.4 0V2M7.7 2v20M15.5 2c-1.4 1.6-2 3.6-2 6 0 2.7 1.2 4 2 4s2-1.3 2-4c0-2.4-.6-4.4-2-6zM15.5 12v10"/></svg></div>
+        <h3>Catering</h3>
+        <p>Hrana, ki jo gostje res pomnijo.</p>
+        <span class="cat-badge">Kmalu</span>
+      </div>
+      <div class="cat-card reveal">
+        <div class="cat-icon"><svg class="icon" viewBox="0 0 24 24"><circle cx="7" cy="18" r="2.8"/><circle cx="17" cy="16" r="2.8"/><path d="M9.8 18V5.5L19.8 3.5V16"/></svg></div>
+        <h3>Glasba in zabava</h3>
+        <p>Band, DJ, ali oboje.</p>
+        <span class="cat-badge">Kmalu</span>
+      </div>
+      <div class="cat-card reveal">
+        <div class="cat-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3.2a1.8 1.8 0 1 1 1.8 1.8c-.9.4-1.8 1-1.8 2v.6"/><path d="M12 7.6L2.5 13.4 4 16l8-4.6 8 4.6 1.5-2.6z"/></svg></div>
+        <h3>Obleke in styling</h3>
+        <p>Obleka, pričeska, ličenje.</p>
+        <span class="cat-badge">Kmalu</span>
+      </div>
+      <div class="cat-card reveal">
+        <div class="cat-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h11"/></svg></div>
+        <h3>Koordinacija</h3>
+        <p>Za tiste, ki rabijo pomoč na dan D.</p>
+        <span class="cat-badge">Kmalu</span>
+      </div>
+      <div class="cat-card reveal">
+        <div class="cat-icon"><svg class="icon" viewBox="0 0 24 24"><rect x="4" y="9.5" width="16" height="10.5" rx="1.2"/><path d="M4 13.2h16M12 9.5v10.5"/><path d="M12 9.5c-2.3 0-3.4-2.2-1.8-3.9 1.6-1.6 3.6.2 1.8 3.9zM12 9.5c2.3 0 3.4-2.2 1.8-3.9-1.6-1.6-3.6.2-1.8 3.9z"/></svg></div>
+        <h3>Ostalo</h3>
+        <p>Prstani, tiskovine, torte in več.</p>
+        <span class="cat-badge">Kmalu</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="suggest-band">
+    <div class="suggest-card reveal">
+      <h3>Poznaš ponudnika, ki bi ga <span class="marker">morala videti?</span></h3>
+      <div class="suggest-actions">
+        <a href="https://www.instagram.com/nevestabrezfiltra/" target="_blank" rel="noopener" class="suggest-btn primary">Predlagaj mi ga →</a>
+        <a href="mailto:nevestabrezfiltra@gmail.com?subject=Sodelovanje%20-%20ponudnik" class="suggest-btn secondary">Si ponudnik? Piši mi →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cta-band" id="prijava">
+  <div class="wrap cta-inner">
+    <h3>Prijavi se — ne za reklame, ampak da veš, <span class="marker">ko pridejo prva priporočila.</span></h3>
+    <div>
+      <form class="cta-form" id="mainSignupForm">
+        <input type="email" name="EMAIL" id="mainSignupEmail" placeholder="tvoj@email.si" autocomplete="off" required>
+        <input type="text" name="email_address_check" value="" style="display:none !important">
+        <input type="hidden" name="locale" value="sl">
+        <button type="submit">Prijava</button>
+      </form>
+      <div id="mainSignupMsg" style="margin-top:12px; font-size:0.9rem; display:none;"></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <footer>© 2026 Nevesta brez filtra</footer>
+</div>
+
+<script>
+  function toggleMobileNav(){
+    const menu = document.getElementById('mobileMenu');
+    menu.classList.toggle('open');
+    document.body.classList.toggle('menu-open', menu.classList.contains('open'));
+  }
+  document.querySelectorAll('#mobileMenu a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.remove('open');
+      document.body.classList.remove('menu-open');
+    });
+  });
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if(entry.isIntersecting){
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => revealObserver.observe(el));
+
+  const mainForm = document.getElementById('mainSignupForm');
+  if(mainForm){
+    mainForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      const btn = this.querySelector('button');
+      const msg = document.getElementById('mainSignupMsg');
+      const emailVal = document.getElementById('mainSignupEmail').value;
+      btn.disabled = true;
+      btn.textContent = 'Trenutek …';
+
+      const fd = new FormData();
+      fd.append('EMAIL', emailVal);
+      fd.append('email_address_check', '');
+      fd.append('locale', 'sl');
+
+      fetch('https://b2a3874e.sibforms.com/serve/MUIFAAqxAFKw9IkJVvDOqp_6X_6U615ZZy0_AvZcPxHAE-BUq_-i2PfMifIa5QPLbQ92Z4xqcmiYBClpuGGPYvQNQWeYRMmtevMmiYVgZbhWrvj9o_K1XdJ5pvGv3OAYfSGp3bWd_ONocsAGSo7GtMXqk2mZR5vnWpHG4iSXT_vk66Cg06nSExfTEG1V7uTezSURt7jUOsSujzAUxg==', {
+        method: 'POST', mode: 'no-cors', body: fd
+      }).catch(function(){}).finally(function(){
+        mainForm.style.display = 'none';
+        msg.style.display = 'block';
+        msg.innerHTML = 'Hvala! Preveri e-pošto 🤍';
+      });
+    });
+  }
+</script>
+
+</body>
+</html>
