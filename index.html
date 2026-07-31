@@ -76,7 +76,18 @@
   }
   .nav-cta:hover{ transform:translateY(-1px) scale(1.03); box-shadow:0 6px 18px rgba(214,41,118,0.38); }
   .nav-cta svg{ width:16px; height:16px; }
-  @media (max-width:720px){ .nav-links{display:none;} }
+  .nav-toggle{ display:none; background:none; border:none; cursor:pointer; padding:6px; }
+  .nav-toggle svg{ width:24px; height:24px; stroke:var(--ink); }
+  @media (max-width:720px){
+    .nav-toggle{ display:block; }
+    .nav-links{ display:none; }
+    .nav-links.mobile-open{
+      display:flex; flex-direction:column; align-items:flex-start; gap:16px;
+      position:absolute; top:100%; left:0; right:0;
+      background:var(--paper-card); border-bottom:1px solid var(--line);
+      padding:22px 24px; z-index:50; box-shadow:0 10px 24px rgba(0,0,0,0.1);
+    }
+  }
 
   /* HERO */
   .hero{
@@ -423,7 +434,10 @@
 <div class="wrap">
   <nav>
     <div class="logo">Nevesta <span>brez filtra</span></div>
-    <div class="nav-links">
+    <button class="nav-toggle" onclick="toggleMobileNav()" aria-label="Meni">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <div class="nav-links" id="navLinks">
       <a href="blog.html">Blog</a>
       <a href="budget-kalkulator.html">Kalkulator</a>
       <a href="casovnica-priprav.html">Časovnica</a>
@@ -647,6 +661,13 @@
 </div>
 
 <script>
+  function toggleMobileNav(){
+    document.getElementById('navLinks').classList.toggle('mobile-open');
+  }
+  document.querySelectorAll('#navLinks a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('mobile-open'));
+  });
+
   const revealEls = document.querySelectorAll('.reveal');
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
